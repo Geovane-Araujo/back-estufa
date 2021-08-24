@@ -6,8 +6,8 @@ import com.atom.Ignore;
 
 import java.io.Serializable;
 
-@Alias(value = "nutrientes")
-public class Nutrientes implements Serializable {
+@Alias(value = "fases_crecimento")
+public class FasesCrecimento implements Serializable {
 
 
     @Ignore
@@ -23,16 +23,6 @@ public class Nutrientes implements Serializable {
     private int id;
 
     private String descricao;
-
-    private String un;
-
-    public String getUn() {
-        return un;
-    }
-
-    public void setUn(String un) {
-        this.un = un;
-    }
 
     public boolean isAdd() {
         return add;

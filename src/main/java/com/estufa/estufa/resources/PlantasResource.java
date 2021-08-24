@@ -1,8 +1,8 @@
 package com.estufa.estufa.resources;
 
 
-import com.estufa.estufa.controller.NutrientesController;
-import com.estufa.estufa.model.Nutrientes;
+import com.estufa.estufa.controller.PlantasController;
+import com.estufa.estufa.model.Plantas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +13,20 @@ import java.util.Hashtable;
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin(origins ="*")
-public class NutrientesResource {
+public class PlantasResource {
 
     @Autowired
-    NutrientesController nutrientesController;
+    PlantasController plantasController;
 
-
-    @PostMapping("/nutrientes")
-    public ResponseEntity<?> save(@RequestBody Nutrientes nutrientes)  {
+    @PostMapping("/plantas")
+    public ResponseEntity<?> save(@RequestBody Plantas plantas)  {
 
         Hashtable retorno = new Hashtable();
         try {
-            nutrientesController.save(nutrientes);
+            plantasController.save(plantas);
             retorno.put("ret", "success");
             retorno.put("motivo", "OK");
-            retorno.put("obj", nutrientes);
+            retorno.put("obj", plantas);
         }
         catch (SQLException e ) {
             retorno.put("ret", "unsuccess");
@@ -39,22 +38,21 @@ public class NutrientesResource {
 
         return ResponseEntity.ok().body(retorno);
     }
-    @GetMapping("/nutrientes/{id}")
+    @GetMapping("/plantas/{id}")
     public ResponseEntity<?> get(@PathVariable(value="id") int id) throws SQLException {
 
+        Plantas p = new Plantas();
         Hashtable retorno = new Hashtable();
         try {
-            if(id == -100){
-                retorno.put("obj", new Nutrientes());
-            } else {
-                Nutrientes nu = (Nutrientes) nutrientesController.getById(id);
-                nu.setAdd(false);
-                nu.setEdit(true);
-                retorno.put("obj", nu);
+            if(id != -100){
+                p = (Plantas)plantasController.getById(id);
+                p.setAdd(false);
+                p.setEdit(true);
             }
 
             retorno.put("ret", "success");
             retorno.put("motivo", "OK");
+            retorno.put("obj",p);
         }
         catch (SQLException e ) {
             retorno.put("ret", "unsuccess");

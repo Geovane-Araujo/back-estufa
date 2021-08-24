@@ -1,6 +1,11 @@
 
+create table nutrientes(
 
-create table if not exists fases_descricao(
+    id serial primary key,
+    descricao varchar(70)
+);
+
+create table fases_crecimento(
 
     id serial primary key,
     descricao varchar(70)
@@ -36,13 +41,9 @@ create table if not exists plantas_fases_crecimento(
     ph real,
     luminosidade real
 );
+alter table plantas_fases_crecimento add constraint fk_idfasecrecimento foreign  key (idfase) references fases_crecimento(id);
+alter table plantas_fases_crecimento add constraint fk_idplantas foreign  key (idplanta) references plantas(id);
 
-
-create table nutrientes(
-
-    id serial primary key,
-    descricao varchar(70)
-);
 
 
 create table if not exists pessoa(

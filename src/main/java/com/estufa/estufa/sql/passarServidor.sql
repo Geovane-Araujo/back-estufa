@@ -20,5 +20,6 @@ create table if not exists plantas_fases_crecimento(
 create table nutrientes(
 
    id serial primary key,
-   descricao varchar(70)
+   descricao varchar(70),
+   un varchar(20)
 );

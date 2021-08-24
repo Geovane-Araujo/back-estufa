@@ -33,4 +33,10 @@ public class DynamicController {
         con.close();
         return retorno;
     }
+
+    public void onDeleted(int id, String tablebase) throws SQLException {
+
+        Connection con = estufaConnections.getNewConnections("estufa_inf");
+        at.deleted(con,id,tablebase);
+    }
 }

@@ -32,4 +32,21 @@ public class DynamicResources {
         }
         return ResponseEntity.ok().body(retorno);
     }
+
+    @DeleteMapping("/dynamicdeleted/{id}/{classname}")
+    public ResponseEntity<?> deleted(@PathVariable(value="id") int id, @PathVariable String classname)  {
+
+        Hashtable retorno = new Hashtable();
+        try {
+
+            dynamicController.onDeleted(id,classname);
+            retorno.put("ret", "success");
+            retorno.put("motivo", "OK");
+        }
+        catch (SQLException e ) {
+            retorno.put("ret", "unsuccess");
+            retorno.put("motivo",e.getMessage());
+        }
+        return ResponseEntity.ok().body(retorno);
+    }
 }

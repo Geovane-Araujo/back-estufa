@@ -9,3 +9,7 @@ from cidade	inner join estado on estado.id = cidade.idestado','cidade ');
 
 --menu_nutrientes
 insert into dynamic(route,sql,tablebase)values('mnu_nutrientes','select id, descricao from nutrientes ','nutrientes ');
+
+--menu_plantas
+insert into dynamic(route,sql,tablebase)values('menu_plantas','select id, nome, nomecientifico,familia from plantas ','plantas ');
+
