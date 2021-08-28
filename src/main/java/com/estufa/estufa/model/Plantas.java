@@ -4,6 +4,7 @@ import com.atom.Alias;
 import com.atom.Id;
 import com.atom.Ignore;
 import com.atom.ListObjectLocal;
+import com.estufa.estufa.resources.PlantaFaseCrecimento;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +38,28 @@ public class Plantas implements Serializable {
     private String ciclovida;
 
     private String categoria;
+
+    @ListObjectLocal
+    private List<PlantaFaseCrecimento> plantaFaseCrecimentos = new ArrayList<>();
+
+    @ListObjectLocal
+    private List<PlantaNutrientes> plantaNutrientes = new ArrayList<>();
+
+    public List<PlantaFaseCrecimento> getPlantaFaseCrecimentos() {
+        return plantaFaseCrecimentos;
+    }
+
+    public void setPlantaFaseCrecimentos(List<PlantaFaseCrecimento> plantaFaseCrecimentos) {
+        this.plantaFaseCrecimentos = plantaFaseCrecimentos;
+    }
+
+    public List<PlantaNutrientes> getPlantaNutrientes() {
+        return plantaNutrientes;
+    }
+
+    public void setPlantaNutrientes(List<PlantaNutrientes> plantaNutrientes) {
+        this.plantaNutrientes = plantaNutrientes;
+    }
 
     public boolean isAdd() {
         return add;

@@ -60,7 +60,7 @@ public class FasesCrecimentoController {
         String sql = "select * from fases_crecimento where id = " + id;
 
         object =  pc.getOne(FasesCrecimento.class,con,sql);
-
+        con.close();
         return object;
     }
 }

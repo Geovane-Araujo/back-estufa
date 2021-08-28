@@ -5,6 +5,8 @@ import com.atom.Alias;
 import com.atom.Atom;
 import com.estufa.estufa.estufaConnection.EstufaConnections;
 import com.estufa.estufa.model.Pessoa;
+import com.estufa.estufa.model.PessoaDados;
+import com.estufa.estufa.model.PessoaEstufa;
 import com.estufa.estufa.model.PessoaUsuario;
 import org.springframework.stereotype.Controller;
 
@@ -48,7 +50,7 @@ public class PessoaUsuarioController {
             // grava os dados pessoais
             pc.insertedOne(pessoausuario.getPessoa().getPessoaDados(),con);
             // grava na tabela usuarios
-            pc.insertedOne(pessoausuario,PessoaUsuario.class,con);
+            pc.insertedOne(pessoausuario,con);
         }
         else if(pessoausuario.isEdit()){
 
@@ -65,16 +67,23 @@ public class PessoaUsuarioController {
         con.close();
         return pessoausuario;
     }
-    public Object getById(int id) throws SQLException {
+    public PessoaUsuario getById(int id) throws SQLException {
 
-        Object object = new Object();
+        PessoaUsuario object = new PessoaUsuario();
         Connection con = null;
         con = connection.getNewConnections("estufa_inf");
 
-        String sql = "select * from "+PessoaUsuario.class.getAnnotation(Alias.class).value()+" where id = " + id;
+        String sql = "select * from pessoa_usuario where idpessoa = " + id;
+        object =  (PessoaUsuario)pc.getOne(PessoaUsuario.class,con,sql);
 
-        object =  pc.getOne(PessoaUsuario.class,con,sql);
+        sql = "select * from pessoa where id = " + object.getIdpessoa();
+        object.setPessoa((Pessoa)pc.getOne(Pessoa.class,con,sql));
 
+        sql = "select * from pessoa_dadoscontato where idpessoa = " + object.getIdpessoa();
+        PessoaDados p = (PessoaDados) pc.getOne(PessoaDados.class,con,sql);
+        object.getPessoa().setPessoaDados(p);
+
+        con.close();
         return object;
     }
 }

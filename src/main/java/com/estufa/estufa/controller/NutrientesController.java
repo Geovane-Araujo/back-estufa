@@ -59,7 +59,7 @@ public class NutrientesController {
         String sql = "select * from nutrientes where id = " + id;
 
         object =  pc.getOne(Nutrientes.class,con,sql);
-
+        con.close();
         return object;
     }
 }

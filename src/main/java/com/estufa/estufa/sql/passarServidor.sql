@@ -23,3 +23,12 @@ create table nutrientes(
    descricao varchar(70),
    un varchar(20)
 );
+
+create table planta_nutrientes(
+
+    id serial primary key,
+    idnutriente int,
+    idplanta int,
+    quantidade real
+);
+

@@ -8,8 +8,9 @@ import com.atom.ObjectLocal;
 
 import java.io.Serializable;
 
-@Alias(value = "pessoa_usuario")
-public class PessoaUsuario implements Serializable {
+@Alias(value = "pessoa_estufa")
+public class PessoaEstufa implements Serializable {
+
 
     @Ignore
     private static final long serialVersionUID = 1L;
@@ -25,9 +26,9 @@ public class PessoaUsuario implements Serializable {
 
     private int idpessoa;
 
-    private String login;
+    private String proprietario;
 
-    private String senha;
+    private String responsavel;
 
     @ObjectLocal
     private Pessoa pessoa = new Pessoa();
@@ -82,22 +83,22 @@ public class PessoaUsuario implements Serializable {
         this.idpessoa = idpessoa;
     }
 
-    public String getLogin() {
-        return login;
+    public String getProprietario() {
+        return proprietario;
     }
 
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getResponsavel() {
+        return responsavel;
     }
 
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
     }
 
 

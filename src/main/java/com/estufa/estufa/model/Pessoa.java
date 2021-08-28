@@ -26,7 +26,7 @@ public class Pessoa implements Serializable {
     private String nome;
 
     @Ignore
-    private PessoaDados pessoaDados;
+    private PessoaDados pessoaDados = new PessoaDados();
 
     public PessoaDados getPessoaDados() {
         return pessoaDados;

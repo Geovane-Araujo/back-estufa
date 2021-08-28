@@ -1,19 +1,16 @@
 package com.estufa.estufa.model;
 
-
 import com.atom.Alias;
 import com.atom.Id;
 import com.atom.Ignore;
-import com.atom.ObjectLocal;
 
 import java.io.Serializable;
 
-@Alias(value = "pessoa_usuario")
-public class PessoaUsuario implements Serializable {
+@Alias(value = "planta_nutrientes")
+public class PlantaNutrientes implements Serializable {
 
     @Ignore
     private static final long serialVersionUID = 1L;
-
     @Ignore
     private boolean add = true;
     @Ignore
@@ -23,22 +20,11 @@ public class PessoaUsuario implements Serializable {
     @Id
     private int id;
 
-    private int idpessoa;
+    private int idnutriente;
 
-    private String login;
+    private int idplanta;
 
-    private String senha;
-
-    @ObjectLocal
-    private Pessoa pessoa = new Pessoa();
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+    private double quantidade;
 
     public boolean isAdd() {
         return add;
@@ -73,31 +59,31 @@ public class PessoaUsuario implements Serializable {
         this.id = id;
     }
 
-    public int getIdpessoa() {
-        return idpessoa;
+    public int getIdnutriente() {
+        return idnutriente;
     }
 
 
-    public void setIdpessoa(int idpessoa) {
-        this.idpessoa = idpessoa;
+    public void setIdnutriente(int idnutriente) {
+        this.idnutriente = idnutriente;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
+    public int getIdplanta() {
+        return idplanta;
     }
 
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setIdplanta(int idplanta) {
+        this.idplanta = idplanta;
+    }
+
+    public double getQuantidade() {
+        return quantidade;
+    }
+
+
+    public void setQuantidade(double quantidade) {
+        this.quantidade = quantidade;
     }
 
 

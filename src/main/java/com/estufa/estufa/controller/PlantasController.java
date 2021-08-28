@@ -59,7 +59,7 @@ public class PlantasController {
         String sql = "select * from "+Plantas.class.getAnnotation(Alias.class).value()+" where id = " + id;
 
         object =  pc.getOne(Plantas.class,con,sql);
-
+        con.close();
         return object;
     }
 }

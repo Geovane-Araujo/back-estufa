@@ -1,3 +1,10 @@
+create table planta_nutrientes(
+
+    id serial primary key,
+    idnutriente int,
+    idplanta int,
+    quantidade real
+);
 
 create table nutrientes(
 
@@ -23,13 +30,6 @@ create table if not exists plantas(
     caracteristica varchar(70)
 );
 
-alter table plantas add nomecientifico varchar(70);
-alter table plantas add familia varchar(70);
-alter table plantas add luminosidade varchar(70);
-alter table plantas add ciclovida varchar(70);
-alter table plantas add categoria varchar(70);
-
-
 create table if not exists plantas_fases_crecimento(
 
     id serial primary key,
@@ -42,7 +42,8 @@ create table if not exists plantas_fases_crecimento(
     luminosidade real
 );
 alter table plantas_fases_crecimento add constraint fk_idfasecrecimento foreign  key (idfase) references fases_crecimento(id);
-alter table plantas_fases_crecimento add constraint fk_idplantas foreign  key (idplanta) references plantas(id);
+alter table plantas_fases_crecimento add constraint fk_idplantas foreign  key (idplanta) references plantas(id) on delete cascade;
+alter table planta_nutrientes add constraint fk_idplantas_nutrientes foreign  key (idplanta) references plantas(id) on delete cascade;
 
 
 
@@ -139,10 +140,6 @@ alter table leitura_sensor add constraint fk_leitura_sensor_medidas foreign key 
 alter table pessoa_estufa add constraint fk_pessoa_estufa_pessoa foreign key (idpessoa) references pessoa(id)on delete cascade;
 alter table pessoa_usuario add constraint fk_pessoa_usuario_pessoa foreign key (idpessoa) references pessoa(id)on delete cascade;
 alter table pessoa_dadoscontato add constraint fk_pessoa_dadoscontato_pessoa foreign key (idpessoa) references pessoa(id) on delete cascade;
-
-alter table fases_crecimento_nutrientes add constraint fk_fases_crecimento_nutrientes_fases_crecimento foreign key (idfasecrecimento) references fases_crecimento(id);
-alter table fases_plantas add constraint fk_fases_plantas_plantas foreign key (idplanta) references plantas(id);
-alter table fases_plantas add constraint fk_fases_plantas_fases foreign key (idfase) references fases_crecimento(id);
 
 
 create table dynamic(
