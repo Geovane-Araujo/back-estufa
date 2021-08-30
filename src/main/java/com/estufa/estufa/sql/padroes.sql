@@ -27,11 +27,25 @@ insert into dynamic(route,sql,tablebase)values('expl_cidades','select * from vw_
 --menu_usuarios
 insert into dynamic(route,sql,tablebase)values('menu_usuarios','select * from vw_usuaios ','vw_usuaios ');
 
-
 --expl_nutrientes
 insert into dynamic(route,sql,tablebase)values('expl_nutrientes','select id, descricao from nutrientes ','nutrientes ');
 
+--expl_fases
+insert into dynamic(route,sql,tablebase)values('expl_fases','SELECT id, descricao FROM fases_crecimento ','fases_crecimento ');
 
+--menu_estufasetor
+insert into dynamic(route,sql,tablebase)values('menu_estufasetor','SELECT id, descricao FROM estufa_setor ','estufa_setor ');
 
+--expl_plantas
+insert into dynamic(route,sql,tablebase)values('expl_plantas','SELECT id, nome FROM plantas ','plantas ');
+
+--expl_estufas
+insert into dynamic(route,sql,tablebase)values('expl_estufas','SELECT id, nome FROM vw_estufas_expl ','vw_estufas_expl ');
+
+--menu_controladores
+insert into dynamic(route,sql,tablebase)values('menu_controladores','SELECT id, nome FROM vw_controladores_menu ','vw_controladores_menu ');
+
+--expl_estufasetor
+insert into dynamic(route,sql,tablebase)values('expl_estufasetor','SELECT id, descricao FROM estufa_setor ','estufa_setor ');
 
 

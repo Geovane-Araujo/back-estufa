@@ -41,9 +41,7 @@ create table if not exists plantas_fases_crecimento(
     ph real,
     luminosidade real
 );
-alter table plantas_fases_crecimento add constraint fk_idfasecrecimento foreign  key (idfase) references fases_crecimento(id);
-alter table plantas_fases_crecimento add constraint fk_idplantas foreign  key (idplanta) references plantas(id) on delete cascade;
-alter table planta_nutrientes add constraint fk_idplantas_nutrientes foreign  key (idplanta) references plantas(id) on delete cascade;
+
 
 
 
@@ -85,34 +83,16 @@ create table if not exists pessoa_estufa(
     responsavel varchar(70)
 );
 
-create table if not exists localizacao_sensor(
+create table if not exists estufa_setor(
 
     id serial primary key,
     descricao varchar(70)
 );
 
-create table if not exists medidas(
 
-    id serial primary key,
-    descricao int
-);
 
-create table if not exists leitura_sensor(
 
-    id serial primary key,
-    idmedida int,
-    valor real,
-    datahora timestamp,
-    idlocalizacao int
-);
 
-create table if not exists cutivo(
-
-    id serial primary key,
-    idfasesplanta int,
-    quantidade real,
-    idlocalizacao int
-);
 
 create table if not exists cidade(
 
@@ -140,6 +120,9 @@ alter table leitura_sensor add constraint fk_leitura_sensor_medidas foreign key 
 alter table pessoa_estufa add constraint fk_pessoa_estufa_pessoa foreign key (idpessoa) references pessoa(id)on delete cascade;
 alter table pessoa_usuario add constraint fk_pessoa_usuario_pessoa foreign key (idpessoa) references pessoa(id)on delete cascade;
 alter table pessoa_dadoscontato add constraint fk_pessoa_dadoscontato_pessoa foreign key (idpessoa) references pessoa(id) on delete cascade;
+alter table plantas_fases_crecimento add constraint fk_idfasecrecimento foreign  key (idfase) references fases_crecimento(id);
+alter table plantas_fases_crecimento add constraint fk_idplantas foreign  key (idplanta) references plantas(id) on delete cascade;
+alter table planta_nutrientes add constraint fk_idplantas_nutrientes foreign  key (idplanta) references plantas(id) on delete cascade;
 
 
 create table dynamic(
@@ -150,3 +133,23 @@ create table dynamic(
     tablebase varchar(50)
 
 );
+
+create table if not exists controladores(
+    id serial primary key,
+    idestufa int,
+    idfase int,
+    nome varchar(50),
+    host varchar(50),
+    ativo smallint
+);
+create table if not exists controladores_plantas(
+
+    id serial primary key,
+    idcontrolador int,
+    quantidade numeric
+
+);
+
+alter table controladores add constraint fk_fasecontrolador foreign key (idfase) references fases_crecimento(id);
+alter table controladores add constraint fk_estufacontrolador foreign key (idestufa) references pessoa(id);
+alter table controladores_plantas add constraint fk_plantacontrolador foreign key (idcontrolador) references controladores(id) on delete cascade;

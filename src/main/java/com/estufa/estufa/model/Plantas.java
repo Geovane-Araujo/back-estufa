@@ -1,9 +1,6 @@
 package com.estufa.estufa.model;
 
-import com.atom.Alias;
-import com.atom.Id;
-import com.atom.Ignore;
-import com.atom.ListObjectLocal;
+import com.atom.*;
 import com.estufa.estufa.resources.PlantaFaseCrecimento;
 
 import java.io.Serializable;
@@ -40,25 +37,25 @@ public class Plantas implements Serializable {
     private String categoria;
 
     @ListObjectLocal
-    private List<PlantaFaseCrecimento> plantaFaseCrecimentos = new ArrayList<>();
+    private List<PlantasNutrientesPlantas> plnutrientes = new ArrayList<>();
 
     @ListObjectLocal
-    private List<PlantaNutrientes> plantaNutrientes = new ArrayList<>();
+    private  List<FasesCrecimentoPlantas> fases = new ArrayList<>();
 
-    public List<PlantaFaseCrecimento> getPlantaFaseCrecimentos() {
-        return plantaFaseCrecimentos;
+    public List<PlantasNutrientesPlantas> getPlnutrientes() {
+        return plnutrientes;
     }
 
-    public void setPlantaFaseCrecimentos(List<PlantaFaseCrecimento> plantaFaseCrecimentos) {
-        this.plantaFaseCrecimentos = plantaFaseCrecimentos;
+    public void setPlnutrientes(List<PlantasNutrientesPlantas> plnutrientes) {
+        this.plnutrientes = plnutrientes;
     }
 
-    public List<PlantaNutrientes> getPlantaNutrientes() {
-        return plantaNutrientes;
+    public List<FasesCrecimentoPlantas> getFases() {
+        return fases;
     }
 
-    public void setPlantaNutrientes(List<PlantaNutrientes> plantaNutrientes) {
-        this.plantaNutrientes = plantaNutrientes;
+    public void setFases(List<FasesCrecimentoPlantas> fases) {
+        this.fases = fases;
     }
 
     public boolean isAdd() {
