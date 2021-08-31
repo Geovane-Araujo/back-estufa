@@ -1,14 +1,17 @@
 package com.estufa.estufa.sockets;
 
+import com.atom.Atom;
+import com.estufa.estufa.estufaConnection.EstufaConnections;
+import com.estufa.estufa.model.Controladores;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Set;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
@@ -16,20 +19,30 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class Socket {
 
     private Session session;
+    EstufaConnections estufaConnections = new EstufaConnections();
     private static Set<Socket> listen = new CopyOnWriteArraySet<>();
+    Atom at = new Atom();
+    List<Map> controladores = new ArrayList<>();
 
     @OnOpen
-    public void onOpen(Session session){
-        System.out.println("Cliente OCnectado");
+    public void onOpen(Session session) throws EncodeException, IOException {
+        System.out.println("Cliente Conectado");
         this.session = session;
+        Gson gjo = new Gson();
+        String json = gjo.toJson(getControlers());
+        session.getBasicRemote().sendText(json);
         listen.add(this);
     }
 
     @OnMessage
     public void message(Session session, String message) throws InterruptedException {
-        for (int i = 0;i < 10;i++){
-            Thread.sleep(500);
-            broadcast("1|22");
+        while(session.isOpen()){
+            String a = "";
+            for(Map e: controladores){
+                a += e.get("ref") + "|" + randon() + "|"+ randon() + "|"+ randon() + "|"+ randon() + "?";
+            }
+            Thread.sleep(5000);
+            broadcast(a);
         }
     }
 
@@ -50,5 +63,33 @@ public class Socket {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private Object getControlers(){
+        controladores.clear();
+        Hashtable ret = new Hashtable();
+        try{
+            Connection con = estufaConnections.getNewConnections("estufa_inf");
+            String sql = "select controladores.nome || ' - ' || pessoa.nome  || ' - ' || fases_crecimento.descricao as fase, controladores.nome as ref\n" +
+                    "from controladores\n" +
+                    "\tinner join pessoa on pessoa.id = controladores.idestufa\n" +
+                    "\tinner join fases_crecimento on controladores.idfase = fases_crecimento.id\n" +
+                    "where ativo = 1";
+
+            controladores = (List<Map>)at.getAll(Map.class,con,sql);
+
+            ret.put("obj",controladores);
+            ret.put("ret","success");
+            return ret;
+        }
+        catch (SQLException ex){
+            ret.put("ret","unsuccess");
+            return ret;
+        }
+    }
+    private String randon(){
+        int a =0;
+        a = (int)(Math.random() * 100) + 1;
+        return String.valueOf(a);
     }
 }

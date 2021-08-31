@@ -36,7 +36,7 @@ public class Controladores implements Serializable {
 
     private String host;
 
-    private String ativo;
+    private int ativo = 1;
 
     private int idsetor;
 
@@ -155,14 +155,31 @@ public class Controladores implements Serializable {
         this.host = host;
     }
 
-    public String getAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-
-    public void setAtivo(String ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 
-
+    @Override
+    public String toString() {
+        return "Controladores{" +
+                "add=" + add +
+                ", edit=" + edit +
+                ", del=" + del +
+                ", id=" + id +
+                ", idestufa=" + idestufa +
+                ", estufa='" + estufa + '\'' +
+                ", idfase=" + idfase +
+                ", descricao='" + descricao + '\'' +
+                ", nome='" + nome + '\'' +
+                ", host='" + host + '\'' +
+                ", ativo=" + ativo +
+                ", idsetor=" + idsetor +
+                ", setor='" + setor + '\'' +
+                ", plantas=" + plantas +
+                '}';
+    }
 }
