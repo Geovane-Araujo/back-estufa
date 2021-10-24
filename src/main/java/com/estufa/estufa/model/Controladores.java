@@ -1,6 +1,8 @@
 package com.estufa.estufa.model;
 
+
 import com.atom.*;
+import com.estufa.estufa.validacoes.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -182,4 +184,6 @@ public class Controladores implements Serializable {
                 ", plantas=" + plantas +
                 '}';
     }
+
+
 }

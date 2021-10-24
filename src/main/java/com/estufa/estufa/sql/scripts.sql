@@ -86,8 +86,16 @@ create table if not exists pessoa_estufa(
 create table if not exists estufa_setor(
 
     id serial primary key,
-    descricao varchar(70)
+    descricao varchar(70),
+    talhoes int
+    ph int,
+    condutividade numeric(18,2)
 );
+
+
+alter table estufa_setor  add talhoes int;
+alter table estufa_setor  add ph int;
+alter table estufa_setor  add condutividade numeric(18,2);
 
 
 

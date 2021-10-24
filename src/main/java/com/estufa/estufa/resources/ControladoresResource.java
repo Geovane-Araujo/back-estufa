@@ -3,6 +3,8 @@ package com.estufa.estufa.resources;
 
 import com.estufa.estufa.controller.ControladoresController;
 import com.estufa.estufa.model.Controladores;
+import com.estufa.estufa.validacoes.EstufaExceptions;
+import com.estufa.estufa.validacoes.Validador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +25,14 @@ public class ControladoresResource {
 
         Hashtable retorno = new Hashtable();
         try {
+            // Validador.validate(controladores);
+
             controladoresController.save(controladores);
             retorno.put("ret", "success");
             retorno.put("motivo", "OK");
             retorno.put("obj", controladores);
         }
-        catch (SQLException e ) {
+        catch (SQLException | EstufaExceptions e ) {
             retorno.put("ret", "unsuccess");
             retorno.put("motivo",e.getMessage());
         } catch (IllegalAccessException ex) {

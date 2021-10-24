@@ -36,10 +36,11 @@ public class Socket {
 
     @OnMessage
     public void message(Session session, String message) throws InterruptedException {
+        String b = "";
         while(session.isOpen()){
             String a = "";
             for(Map e: controladores){
-                a += e.get("ref") + "|" + randon() + "|"+ randon() + "|"+ randon() + "|"+ randon() + "?";
+                a += e.get("ref") + "|" + randon() + "|"+ randonTemperatura() + "|"+ randonPh() + "|"+ randonCondutividade() + "?";
             }
             Thread.sleep(5000);
             broadcast(a);
@@ -70,10 +71,11 @@ public class Socket {
         Hashtable ret = new Hashtable();
         try{
             Connection con = estufaConnections.getNewConnections("estufa_inf");
-            String sql = "select controladores.nome || ' - ' || pessoa.nome  || ' - ' || fases_crecimento.descricao as fase, controladores.nome as ref\n" +
+            String sql = "select controladores.nome || ' - ' || pessoa.nome  || ' - ' || fases_crecimento.descricao as fase, controladores.nome as ref,ph,condutividade \n" +
                     "from controladores\n" +
                     "\tinner join pessoa on pessoa.id = controladores.idestufa\n" +
                     "\tinner join fases_crecimento on controladores.idfase = fases_crecimento.id\n" +
+                    "  inner join estufa_setor on estufa_setor.id = controladores.idsetor " +
                     "where ativo = 1";
 
             controladores = (List<Map>)at.getAll(Map.class,con,sql);
@@ -90,6 +92,24 @@ public class Socket {
     private String randon(){
         int a =0;
         a = (int)(Math.random() * 100) + 1;
+        return String.valueOf(a);
+    }
+    private String randonPh(){
+        int a =0;
+        a = (int)(Math.random() * 14) + 1;
+        return String.valueOf(a);
+    }
+
+    private String randonTemperatura(){
+        int a =0;
+        Random r = new Random();
+        a = r.nextInt((42 - 18) + 1) + 18;
+        return String.valueOf(a);
+    }
+
+    private String randonCondutividade(){
+        double a =0;
+        a = (double)(Math.random() * 4) + 1;
         return String.valueOf(a);
     }
 }

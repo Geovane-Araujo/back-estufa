@@ -33,6 +33,11 @@
 			<version>2.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.Rza</groupId>
+			<artifactId>Rza</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -46,6 +51,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.5</version>
 		</dependency>
 	</dependencies>
 

@@ -24,6 +24,35 @@ public class EstufaSetor implements Serializable {
 
     private String descricao;
 
+    private int talhoes;
+
+    private int ph;
+
+    private double condutividade;
+
+    public int getTalhoes() {
+        return talhoes;
+    }
+
+    public void setTalhoes(int talhoes) {
+        this.talhoes = talhoes;
+    }
+
+    public int getPh() {
+        return ph;
+    }
+
+    public void setPh(int ph) {
+        this.ph = ph;
+    }
+
+    public double getCondutividade() {
+        return condutividade;
+    }
+
+    public void setCondutividade(double condutividade) {
+        this.condutividade = condutividade;
+    }
 
     public boolean isAdd() {
         return add;
